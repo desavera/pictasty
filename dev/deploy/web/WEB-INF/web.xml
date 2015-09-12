@@ -5,13 +5,13 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
 http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 	
     <servlet>
-        <servlet-name>PicReplacerServlet</servlet-name>
-        <servlet-class>picktasty.PicReplacerServlet</servlet-class>
+        <servlet-name>PickReplacerServlet</servlet-name>
+        <servlet-class>picktasty.server.PickReplacerServlet</servlet-class>
     </servlet>
 	
     <servlet-mapping>
-        <servlet-name>PicReplacerServlet</servlet-name>
-        <url-pattern>/picreplacer</url-pattern>
+        <servlet-name>PickReplacerServlet</servlet-name>
+        <url-pattern>/pickreplacer</url-pattern>
     </servlet-mapping>
 </web-app>
 

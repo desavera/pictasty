@@ -6,44 +6,28 @@ import javax.servlet.http.*;
 
 public class PickReplacerServlet extends HttpServlet {
 
-    private String logoName;
-
     public void init() throws ServletException {
-        logoName = "Hello World";
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("<h1>" + logoName + "</h1>");
-    }
 
-    public void destroy() {
-        // do nothing.
-    }
-}
-
-/*
-
-public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
-       ServletContext cntx= getServletContext();
+      ServletContext cntx= getServletContext();
       // Get the absolute path of the image
-      String filename = cntx.getRealPath("Images/button.png");
+      String filename = cntx.getRealPath("data/picktasty-desafio.png");
       // retrieve mimeType dynamically
       String mime = cntx.getMimeType(filename);
       if (mime == null) {
-        resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         return;
       }
 
-      resp.setContentType(mime);
+      response.setContentType(mime);
       File file = new File(filename);
-      resp.setContentLength((int)file.length());
+      response.setContentLength((int)file.length());
 
       FileInputStream in = new FileInputStream(file);
-      OutputStream out = resp.getOutputStream();
+      OutputStream out = response.getOutputStream();
 
       // Copy the contents of the file to the output stream
        byte[] buf = new byte[1024];
@@ -51,8 +35,14 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOExc
        while ((count = in.read(buf)) >= 0) {
          out.write(buf, 0, count);
       }
-    out.close();
-    in.close();
+    
+      out.close();
+      in.close();
 
+    }
+
+    public void destroy() {
+        // do nothing.
+    }
 }
-*/
+
