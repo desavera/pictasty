@@ -1,10 +1,10 @@
-package picktasty.server;
+package pictasty.server;
 
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-public class PickReplacerServlet extends HttpServlet {
+public class PicReplacerServlet extends HttpServlet {
 
     public void init() throws ServletException {
     }
@@ -14,7 +14,7 @@ public class PickReplacerServlet extends HttpServlet {
 
       ServletContext cntx= getServletContext();
       // Get the absolute path of the image
-      String filename = cntx.getRealPath("data/picktasty-desafio.png");
+      String filename = cntx.getRealPath("data/pictasty-desafio.png");
       // retrieve mimeType dynamically
       String mime = cntx.getMimeType(filename);
       if (mime == null) {
