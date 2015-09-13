@@ -1,13 +1,3 @@
-
-/*
- * Pictasty
- * 
- * LayerCounter - a Pages for OCG model counter on a PDF file
- *
- * author : Mario de Sa Vera (desavera@gmail.com)
- *
- */
-
 import com.itextpdf.text.pdf.PRStream;
 import com.itextpdf.text.pdf.PdfArray;
 import com.itextpdf.text.pdf.PdfDictionary;

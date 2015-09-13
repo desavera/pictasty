@@ -1,13 +1,3 @@
-/*
- * Pictasty
- * 
- * LayerInspector - an inspector for a PDF file Layer
- *
- * author : Mario de Sa Vera (desavera@gmail.com)
- *
- */
-
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Map;
@@ -39,17 +29,16 @@ public class LayerInspector {
 
 
     /** The resulting PDF. */
-    public static final String SOURCE
-        = "../doc/layer-inspector-in.pdf";
+    public static String SOURCE
+        = "";
     /** The resulting PDF. */
-    public static final String RESULT
-        = "../doc/layer-inspector-out.pdf";
-    /** The movie poster. */
-    public static final String RESOURCE
-        = "resources/img/loa.jpg";
+    public static String RESULT
+        = "layer-out.pdf";
 
     public static void main(String[] args)
         throws IOException, DocumentException {
+
+        SOURCE = args[0];
 
         // Create a reader
         PdfReader reader = new PdfReader(SOURCE);
