@@ -19,7 +19,7 @@ import com.itextpdf.text.DocumentException;
 
 import pictasty.engine.*;
 
-public class PicReplacerTest {
+public class PicFileReplacerTest {
 
 
     public static String RESULT = "layer-out.pdf";
@@ -27,7 +27,7 @@ public class PicReplacerTest {
     public static void main(String[] args)
         throws IOException, DocumentException {
 
-        PicReplacer.replace(new FileInputStream(args[0]),new FileOutputStream(RESULT),args[1]);
+        PicFileReplacer.replace(args[0],RESULT,new PicTemplateDescriptor(),new PicDataSource(args[1]));
 
     }
 

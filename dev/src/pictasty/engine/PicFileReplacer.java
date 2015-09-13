@@ -11,8 +11,8 @@
 package pictasty.engine;
 
 
-import java.io.OutputStream;
-import java.io.InputStream;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Iterator;
@@ -43,18 +43,13 @@ import com.itextpdf.text.pdf.PdfLayer;
 
 
 
-public class PicReplacer {
-
-    public static Font DEFAULT_FONT = new Font(FontFamily.HELVETICA, 16, Font.BOLD, new BaseColor(108, 153, 235));
-    public static String REPLACEMENT_LAYER_NAME = "DESAFIO";
-
-    public static int Xi = 50;
-    public static int Xf = 500;
-    public static int Yi = 685;
-    public static int Yf = 715;
+public class PicFileReplacer {
 
 
-    public static void replace(InputStream input,OutputStream output,String newText) throws DocumentException,IOException {
+    public static void replace(String inputFileName,String outputFileName,PicTemplateDescriptor desc,PicDataSource data) throws DocumentException,IOException {
+
+        FileInputStream input = new FileInputStream(inputFileName);
+        FileOutputStream output = new FileOutputStream(outputFileName);
 
         PdfReader reader = new PdfReader(input);
         Document document = new Document(PageSize.A5.rotate());
@@ -71,17 +66,19 @@ public class PicReplacer {
 
             String layerName = it.next();
 
-            if (layerName.compareTo(REPLACEMENT_LAYER_NAME) == 0) {
+            if (layerName.compareTo(desc.replacementLayerName) == 0) {
 
                 PdfLayer layer = layers.get(layerName);
                 layer.setOn(false);
             }
         }
 
+        // this is a hardcode for template#1
+
         PdfContentByte content = stamper.getOverContent(1);
         ColumnText ct = new ColumnText(content);
-        ct.setSimpleColumn(Xi,Yf,Xf,Yi);
-        ct.setText(new Phrase(newText,DEFAULT_FONT));
+        ct.setSimpleColumn(desc.Xi,desc.Yf,desc.Xf,desc.Yi);
+        ct.setText(new Phrase(data.text,desc.font));
         ct.go();
 
         stamper.close();
