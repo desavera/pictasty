@@ -1,5 +1,4 @@
-/*
- * PicTasty
+/* PicTasty
  * 
  * PicReplacer - a content replacement component. The output stream 
  * holds the input stream content replaced.
@@ -46,7 +45,7 @@ import com.itextpdf.text.pdf.PdfLayer;
 public class PicFileReplacer {
 
 
-    public static void replace(String inputFileName,String outputFileName,PicTemplateDescriptor desc,PicDataSource data) throws DocumentException,IOException {
+    public static void replace(String inputFileName,String outputFileName,PicTemplate1Descriptor desc,PicDataSource data) throws DocumentException,IOException {
 
         FileInputStream input = new FileInputStream(inputFileName);
         FileOutputStream output = new FileOutputStream(outputFileName);
@@ -80,6 +79,31 @@ public class PicFileReplacer {
         ct.setSimpleColumn(desc.Xi,desc.Yf,desc.Xf,desc.Yi);
         ct.setText(new Phrase(data.text,desc.font));
         ct.go();
+
+        stamper.close();
+        reader.close();
+    }
+
+    public static void replace(String inputFileName,String outputFileName,PicTemplate2Descriptor desc,PicImageSource data) throws DocumentException,IOException {
+
+        FileInputStream input = new FileInputStream(inputFileName);
+        FileOutputStream output = new FileOutputStream(outputFileName);
+
+        PdfReader reader = new PdfReader(input);
+        Document document = new Document(PageSize.A5.rotate());
+      
+        document.open();
+       
+        PdfStamper stamper = new PdfStamper(reader,output);
+
+        Map<String, PdfLayer> layers = stamper.getPdfLayers();
+        
+        // this is a hardcode for template#2
+
+        PdfContentByte content = stamper.getOverContent(1);
+	//data.image.setAbsolutePosition(desc.X,desc.Y);
+        content.addImage(data.image,desc.transform);
+        //content.addImage(data.image);
 
         stamper.close();
         reader.close();

@@ -1,1 +1,1 @@
-javac -d ../../../build/ -cp ../../../../../lib/itextpdf:.
+javac -d ../../../build/ -cp ../../../../../lib/itextpdf:../../../build:.
