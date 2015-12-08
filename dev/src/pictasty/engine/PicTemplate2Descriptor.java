@@ -27,9 +27,17 @@ public class PicTemplate2Descriptor {
     public static String LAYER_NAME = "DESAFIO";
 
     // this is a hardcode for template#2
-    public static int X = 532;
-    //public static int Y = 1533;
-    public static int Y = 364;
+    public static int X = 730;
+    public static int Y = 1530;
+
+    public static int X1 = 730;
+    public static int Y1 = 1530;
+    public static int X2 = 1160;
+    public static int Y2 = 1730;
+    public static int X3 = 1540;
+    public static int Y3 = 1195;
+    public static int X4 = 1150;
+    public static int Y4 = 1035;
 
     AffineTransform transform;
 

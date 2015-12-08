@@ -1,1 +1,1 @@
-java -cp ../../../../../lib/itextpdf:../../../build pictasty.engine.PicFileReplacerTest ../../../templates/01-Isometric-view.pdf ../../../templates/pic-desafio2.png
+java -cp ../../../../lib/itextpdf:../../../build pictasty.engine.PicFileReplacerTest ../../../templates/01-Isometric-view.pdf ../../../templates/pic-desafio2.png

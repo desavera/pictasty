@@ -40,7 +40,7 @@ import com.itextpdf.text.pdf.PdfLayer;
 public class PicLayerFactory {
 
     public static PdfLayer create(PdfWriter writer,
-                                  final PicTemplateDescriptor desc,
+                                  final PicTemplate1Descriptor desc,
                                   final PicDataSource dataSource) throws IOException {
 
         PdfContentByte cb = writer.getDirectContent();

@@ -40,6 +40,7 @@ import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PRStream;
 import com.itextpdf.text.pdf.PdfLayer;
 
+import com.itextpdf.awt.geom.AffineTransform;
 
 
 public class PicFileReplacer {
@@ -102,7 +103,14 @@ public class PicFileReplacer {
 
         PdfContentByte content = stamper.getOverContent(1);
 	//data.image.setAbsolutePosition(desc.X,desc.Y);
-        content.addImage(data.image,desc.transform);
+
+   	AffineTransform at = AffineTransform.getTranslateInstance(630,320);
+       	at.concatenate(AffineTransform.getScaleInstance(data.image.getScaledWidth()/4, data.image.getScaledHeight()/8));
+       	at.concatenate(AffineTransform.getShearInstance(.35,-.95));
+       	content.addImage(data.image, at);
+
+
+        //content.addImage(data.image,desc.transform);
         //content.addImage(data.image);
 
         stamper.close();
