@@ -36,7 +36,8 @@ public class PicUploaderServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request,
         HttpServletResponse response)
         throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+
+        //response.setContentType("text/html;charset=UTF-8");
 
         ServletContext cntx= getServletContext();
 
@@ -64,17 +65,18 @@ public class PicUploaderServlet extends HttpServlet {
             while ((read = filecontent.read(bytes)) != -1) {
                 out.write(bytes, 0, read);
             }
-            writer.println("Hey New file " + fileName + " created at " + path);
+            //writer.println("Hey New file " + fileName + " created at " + path);
             //LOGGER.log(Level.INFO, "File{0}being uploaded to {1}", 
                     //new Object[]{fileName, path});
 
             PicFileReplacer.replace(templateFileName,finalFileName,new PicTemplate2Descriptor(),new PicImageSource(new String(path + '/' + fileName).toString()));
 
-            writer.println("Hey New template output " + finalFileName);
+	    response.sendRedirect("data/pictasty-output.pdf");
 
         } catch (DocumentException ex) {
 
                response.getOutputStream().write(ex.toString().getBytes());
+
         } catch (FileNotFoundException fne) {
             writer.println("You either did not specify a file to upload or are "
                     + "trying to upload a file to a protected or nonexistent "

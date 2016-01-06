@@ -11,6 +11,7 @@ package pictasty.engine;
 
 
 import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Map;
