@@ -1,0 +1,8 @@
+export AWS_ACCESS_KEY=AKIAJ3XEH3FRVSSYLYGA
+export AWS_SECRET_KEY=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
+
+export AWS_SERVER_DNS=ec2-52-88-183-254.us-west-2.compute.amazonaws.com
+
+export AWS_SSH_COMMAND= ssh -i ../var/impa.pem ubuntu@ec2-52-88-183-254.us-west-2.compute.amazonaws.com
+
+export AWS_SERVER_HTTP=http://52.88.183.254:8080/
