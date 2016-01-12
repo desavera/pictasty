@@ -50,18 +50,12 @@ public class PicUploaderServlet extends HttpServlet {
         final Part filePart = request.getPart("file");
         final String fileName = getFileName(filePart);
 
-        OutputStream outFile = null;
+        OutputStream out = null;
         InputStream filecontent = null;
-
-        // You must tell the browser the file type you are going to send
-        // for example application/pdf, text/plain, text/html, image/jpg
-	response.setContentType("application/pdf");
-	response.addHeader("Content-Disposition", "attachment; filename=" + "pictasty-output.pdf");
-
-        final OutputStream outWeb = response.getOutputStream();
+        final PrintWriter writer = response.getWriter();
 
         try {
-            outFile = new FileOutputStream(new File(path + File.separator
+            out = new FileOutputStream(new File(path + File.separator
                     + fileName));
             filecontent = filePart.getInputStream();
 
@@ -69,7 +63,7 @@ public class PicUploaderServlet extends HttpServlet {
             final byte[] bytes = new byte[1024];
 
             while ((read = filecontent.read(bytes)) != -1) {
-                outFile.write(bytes, 0, read);
+                out.write(bytes, 0, read);
             }
             //writer.println("Hey New file " + fileName + " created at " + path);
             //LOGGER.log(Level.INFO, "File{0}being uploaded to {1}", 
@@ -79,14 +73,22 @@ public class PicUploaderServlet extends HttpServlet {
 
             //writer.println("Hey New template output " + finalFileName);
 
+            // Find this file id in database to get file name, and file type
 
+            // You must tell the browser the file type you are going to send
+            // for example application/pdf, text/plain, text/html, image/jpg
+	    response.setContentType("application/pdf");
+	    response.addHeader("Content-Disposition", "attachment; filename=" + "pictasty-output.pdf");
 
             // Assume file name is retrieved from database
             // For example D:\\file\\test.pdf
 
-            File my_file = new File(finalFileName);
-	    //response.setContentLength((int) my_file.length());
+            //File my_file = new File(finalFileName);
+            File my_file = new File("data/pictasty-output.pdf");
+	    response.setContentLength((int) my_file.length());
 
+            // This should send the file to browser
+            OutputStream outWeb = response.getOutputStream();
             FileInputStream in = new FileInputStream(my_file);
             byte[] buffer = new byte[4096];
             int length;
@@ -99,28 +101,25 @@ public class PicUploaderServlet extends HttpServlet {
 
         } catch (DocumentException ex) {
 
-               outWeb.write(ex.toString().getBytes());
+               response.getOutputStream().write(ex.toString().getBytes());
 
         } catch (FileNotFoundException fne) {
-            String exString = new String("You either did not specify a file to upload or are "
+            writer.println("You either did not specify a file to upload or are "
                     + "trying to upload a file to a protected or nonexistent "
                     + "location.");
-            outWeb.write(exString.getBytes());
-
-            exString = new String("<br/> ERROR: " + fne.getMessage());
-            outWeb.write(exString.getBytes());
+            writer.println("<br/> ERROR: " + fne.getMessage());
 
             //LOGGER.log(Level.SEVERE, "Problems during file upload. Error: {0}", 
                     //new Object[]{fne.getMessage()});
         } finally {
-            if (outFile != null) {
-                outFile.close();
+            if (out != null) {
+                out.close();
             }
             if (filecontent != null) {
                 filecontent.close();
             }
-            if (outWeb != null) {
-                outWeb.close();
+            if (writer != null) {
+                writer.close();
             }
         }
     }
