@@ -1,1 +1,0 @@
-javac -cp .:../../build:../../lib/servlet3-api.jar:../deploy/pictasty-a.jar:../../lib/itextpdf pictasty/server/PicUploaderServlet.java

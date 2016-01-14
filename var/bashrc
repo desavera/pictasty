@@ -6,3 +6,5 @@ export AWS_SERVER_DNS=ec2-52-88-183-254.us-west-2.compute.amazonaws.com
 export AWS_SSH_COMMAND= ssh -i ../var/impa.pem ubuntu@ec2-52-88-183-254.us-west-2.compute.amazonaws.com
 
 export AWS_SERVER_HTTP=http://52.88.183.254:8080/
+
+export AWS_SECURITY_CREDENTIALS_URL=https://console.aws.amazon.com/iam/home?#security_credential

@@ -75,7 +75,7 @@ public class PicUploaderServlet extends HttpServlet {
             //LOGGER.log(Level.INFO, "File{0}being uploaded to {1}", 
                     //new Object[]{fileName, path});
 
-            PicFileReplacer.replace(templateFileName,finalFileName,new PicTemplate2Descriptor(),new PicImageSource(new String(path + '/' + fileName).toString()));
+            PicFileReplacer.replace(templateFileName,finalFileName,new PicTemplate3Descriptor(),new PicImageSource(new String(path + '/' + fileName).toString()));
 
             //writer.println("Hey New template output " + finalFileName);
 

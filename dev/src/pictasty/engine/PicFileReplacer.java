@@ -117,5 +117,50 @@ public class PicFileReplacer {
         stamper.close();
         reader.close();
     }
-}
 
+    public static void replace(String inputFileName,String outputFileName,PicTemplate3Descriptor desc,PicImageSource data) throws DocumentException,IOException {
+
+        FileInputStream input = new FileInputStream(inputFileName);
+        FileOutputStream output = new FileOutputStream(outputFileName);
+
+        PdfReader reader = new PdfReader(input);
+        Document document = new Document(PageSize.A5.rotate());
+      
+        document.open();
+       
+        PdfStamper stamper = new PdfStamper(reader,output);
+
+        Map<String, PdfLayer> layers = stamper.getPdfLayers();
+        
+        // this is a hardcode for template#2
+
+        PdfContentByte content = stamper.getOverContent(1);
+	//data.image.setAbsolutePosition(desc.X,desc.Y);
+
+        //AffineTransform at = AffineTransform.getTranslateInstance(2624,520);
+        //AffineTransform at = AffineTransform.getTranslateInstance(1900,650);
+
+       	//desc.transform.concatenate(AffineTransform.getScaleInstance(data.image.getScaledWidth()*4, data.image.getScaledHeight()*2));
+       	//desc.transform.concatenate(AffineTransform.getShearInstance(.2,.95));
+
+        //AffineTransform at = AffineTransform.getScaleInstance(desc.width(),desc.height()*.86);
+       	//at.concatenate(AffineTransform.getShearInstance(.58,0));
+       	//at.concatenate(AffineTransform.getRotateInstance(.52));
+       	//at.concatenate(AffineTransform.getTranslateInstance(desc.X2,desc.MAX_HEIGHT - desc.Y2));
+       	//at.concatenate(AffineTransform.getTranslateInstance(20,20));
+        AffineTransform at = AffineTransform.getTranslateInstance(1950,765);
+        at.scale(desc.width(),desc.height()*.86);
+        at.scale(.47,.47);
+        at.shear(-.58,0);
+        //at.shear(-1.73,0);
+        at.rotate(.52);
+       	content.addImage(data.image, at);
+
+
+        //content.addImage(data.image,desc.transform);
+        //content.addImage(data.image);
+
+        stamper.close();
+        reader.close();
+    }
+}

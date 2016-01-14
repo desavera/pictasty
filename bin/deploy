@@ -1,0 +1,1 @@
+jar -cf ../deploy/pictasty-a.jar pictasty/engine/*class pictasty/server/*class
